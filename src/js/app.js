@@ -22,25 +22,39 @@ import "../style/index.css";
         city: null
     }
  */
+
 function render(variables = {}) {
   console.log("These are the current variables: ", variables); //print on the console
+  if (
+    variables.name === "" ||
+    variables.lastname === "" ||
+    variables.role === "" ||
+    variables.country === "" ||
+    variables.city === ""
+  ) {
+    alert("Please fill in all required fields.");
+    return;
+  }
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
   if (variables.includeCover == false) cover = "<div class='cover'></div>";
 
+  let fullName = `<h1>${variables.name} ${variables.lastname}</h1>`;
+  let job = `<h2>${variables.role}</h2>`;
+  let place = `<h3>${variables.country} ${variables.city}</h3>`;
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
             ${cover}
           <img src="${variables.avatarURL}" class="photo" />
-          <h1>Lucy Boilett</h1>
-          <h2>Web Developer</h2>
-          <h3>Miami, USA</h3>
-          <ul class="position-right">
-            <li><a href="https://twitter.com/4geeksacademy"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="https://github.com/4geeksacademy"><i class="fab fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/4geeksacademy"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/4geeksacademy"><i class="fab fa-instagram"></i></a></li>
+          ${fullName}
+          ${job}
+          ${place}
+          <ul class="${variables.socialMediaPosition}" >
+            <li><a href="https://twitter.com/${variables.twitter}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="https://github.com/${variables.github}" target="_blank"><i class="fa fa-github"></i></a></li>
+            <li><a href="https://linkedin.com/${variables.linkedin}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+            <li><a href="https://instagram.com/${variables.instagram}" target="_blank"><i class="fa fa-instagram"></i></a></li>
           </ul>
         </div>
     `;
@@ -60,17 +74,30 @@ window.onload = function() {
     // social media bar position (left or right)
     socialMediaPosition: "position-left",
     // social media usernames
-    twitter: null,
-    github: "alesanchezr",
+    twitter: "",
+    github: "",
     linkedin: null,
     instagram: null,
-    name: null,
-    lastname: null,
-    role: null,
-    country: null,
-    city: null
+    name: "",
+    lastname: "",
+    role: "",
+    country: "",
+    city: ""
   };
-  render(window.variables); //render the card for the first time
+  document.querySelector("#name").addEventListener("keydown", function(event) {
+    if (event.keyCode === 13) {
+      render(window.variables);
+    }
+  });
+
+  // Add event listener for Enter key press in the lastname field
+  document
+    .querySelector("#lastname")
+    .addEventListener("keydown", function(event) {
+      if (event.keyCode === 13) {
+        render(window.variables);
+      }
+    });
 
   document.querySelectorAll(".picker").forEach(function(elm) {
     elm.addEventListener("change", function(e) {
