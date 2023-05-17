@@ -25,16 +25,6 @@ import "../style/index.css";
 
 function render(variables = {}) {
   console.log("These are the current variables: ", variables); //print on the console
-  if (
-    variables.name === "" ||
-    variables.lastname === "" ||
-    variables.role === "" ||
-    variables.country === "" ||
-    variables.city === ""
-  ) {
-    alert("Please fill in all required fields.");
-    return;
-  }
   // here we ask the logical questions to make decisions on how to build the html
   // if includeCover==false then we reset the cover code without the <img> tag to make the cover transparent.
   let cover = `<div class="cover"><img src="${variables.background}" /></div>`;
@@ -76,28 +66,16 @@ window.onload = function() {
     // social media usernames
     twitter: "",
     github: "",
-    linkedin: null,
-    instagram: null,
+    linkedin: "",
+    instagram: "",
     name: "",
     lastname: "",
     role: "",
     country: "",
     city: ""
   };
-  document.querySelector("#name").addEventListener("keydown", function(event) {
-    if (event.keyCode === 13) {
-      render(window.variables);
-    }
-  });
 
   // Add event listener for Enter key press in the lastname field
-  document
-    .querySelector("#lastname")
-    .addEventListener("keydown", function(event) {
-      if (event.keyCode === 13) {
-        render(window.variables);
-      }
-    });
 
   document.querySelectorAll(".picker").forEach(function(elm) {
     elm.addEventListener("change", function(e) {
