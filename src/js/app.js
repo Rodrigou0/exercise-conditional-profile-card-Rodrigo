@@ -35,24 +35,21 @@ function render(variables = {}) {
   let place = `<h3>${variables.country} ${variables.city}</h3>`;
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
-            ${cover}
-          <img src="${variables.avatarURL}" class="photo" />
-          ${fullName}
-          ${job}
-          ${place}
-          <ul class="${variables.socialMediaPosition}" >
-            <li><a href="https://twitter.com/${variables.twitter}" target="_blank"><i class="fa fa-twitter"></i></a></li>
-            <li><a href="https://github.com/${variables.github}" target="_blank"><i class="fa fa-github"></i></a></li>
-            <li><a href="https://linkedin.com/${variables.linkedin}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-            <li><a href="https://instagram.com/${variables.instagram}" target="_blank"><i class="fa fa-instagram"></i></a></li>
-          </ul>
-        </div>
-    `;
+              ${cover}
+              <img src="${variables.avatarURL}" class="photo" />
+              ${fullName}
+              ${job}
+              ${place}
+              <ul class="${variables.socialMediaPosition}" >
+                <li><a href="https://twitter.com/${variables.twitter}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://github.com/${variables.github}" target="_blank"><i class="fa fa-github"></i></a></li>
+                <li><a href="https://linkedin.com/${variables.linkedin}" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="https://instagram.com/${variables.instagram}" target="_blank"><i class="fa fa-instagram"></i></a></li>
+              </ul>
+            </div>
+        `;
 }
 
-/**
- * Don't change any of the lines below, here is where we do the logic for the dropdowns
- */
 window.onload = function() {
   window.variables = {
     // if includeCover is true the algorithm should
@@ -90,7 +87,9 @@ window.onload = function() {
           : this.value == "false"
           ? false
           : this.value;
-      render(Object.assign(window.variables, values)); // render again the card with new valus
+      render(Object.assign(window.variables, values)); // render again the card with new values
     });
   });
+
+  render(window.variables); // Render the card initially
 };
