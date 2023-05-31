@@ -32,7 +32,7 @@ function render(variables = {}) {
 
   let fullName = `<h1>${variables.name} ${variables.lastname}</h1>`;
   let job = `<h2>${variables.role}</h2>`;
-  let place = `<h3>${variables.country} ${variables.city}</h3>`;
+  let place = `<h3>${variables.city}, ${variables.country}</h3>`;
   // reset the website body with the new html output
   document.querySelector("#widget_content").innerHTML = `<div class="widget">
               ${cover}
